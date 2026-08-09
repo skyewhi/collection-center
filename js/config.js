@@ -4,7 +4,7 @@
  */
 const SITE_CONFIG = {
   // 访问密码（前端校验，安全性有限，请勿存放敏感内容）
-  password: 'mycollection2026',
+  password: 'clear',
 
   // 密码会话有效期（小时），超过后需重新输入
   sessionHours: 720, // 约30天
