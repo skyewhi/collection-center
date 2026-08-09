@@ -470,20 +470,6 @@
       const typeLabel = item.type === 'video' ? '视频' : '图文';
       const sourceLabel = sourceLabels[item.source] || item.source || '';
       const date = item.savedDate || '';
-      const thumbnail = item.thumbnail || '';
-
-      // 缩略图
-      let thumbHtml;
-      if (thumbnail) {
-        thumbHtml = `<img src="${thumbnail}" alt="${this.escape(item.title)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="card-thumbnail-placeholder" style="display:none;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-          </div>`;
-      } else {
-        thumbHtml = `<div class="card-thumbnail-placeholder">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        </div>`;
-      }
 
       // 分类标签
       let catHtml = '';
@@ -496,12 +482,11 @@
       }
 
       return `<div class="content-card" data-id="${item.id}">
-        <div class="card-thumbnail">
-          <span class="card-type-badge ${item.type}">${typeLabel}</span>
-          <span class="card-source">${this.escape(sourceLabel)}</span>
-          ${thumbHtml}
-        </div>
         <div class="card-body">
+          <div class="card-header">
+            <span class="card-type-badge ${item.type}">${typeLabel}</span>
+            <span class="card-source">${this.escape(sourceLabel)}</span>
+          </div>
           <div class="card-title">${this.escape(item.title)}</div>
           <div class="card-meta">
             <div class="card-categories">${catHtml}</div>
