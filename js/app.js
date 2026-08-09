@@ -399,7 +399,14 @@
     },
 
     getFilteredItems() {
+      const allItems = dataManager.getAllItems();
       let items = dataManager.getItems();
+
+      // 建立id到数组位置的映射，用于按加入顺序排序
+      const indexMap = {};
+      allItems.forEach((item, idx) => {
+        indexMap[item.id] = idx;
+      });
 
       // 分类筛选
       if (state.currentCategory !== 'all') {
@@ -423,8 +430,8 @@
         });
       }
 
-      // 按日期降序
-      items.sort((a, b) => new Date(b.savedDate || 0) - new Date(a.savedDate || 0));
+      // 按加入收藏的顺序排序（数组中越靠后=越新加入，显示在前面）
+      items.sort((a, b) => (indexMap[b.id] ?? 0) - (indexMap[a.id] ?? 0));
 
       return items;
     },
